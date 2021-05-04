@@ -5,7 +5,7 @@ node {
     }
 
     stage('sonar-scanner') {
-      def scannerHome = tool 'sonar';
+      def scannerHome = tool 'sonarqube';
       withCredentials([string(credentialsId: 'sonarqube', variable: 'sonarLogin')]) {
         sh "${scannerHome}/bin/sonar-scanner -e -Dsonar.host.url=https://sonarqube.platform.ajsy.com.br -Dsonar.login=${sonarLogin} -Dsonar.projectName=gs-gradle -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=GS -Dsonar.sources=complete/src/main/ -Dsonar.tests=complete/src/test/ -Dsonar.language=java -Dsonar.java.binaries=."
       }
